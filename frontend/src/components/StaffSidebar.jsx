@@ -29,13 +29,13 @@ const StaffSidebar = () => {
   };
 
   const navItems = [
-    // {
-    //   id: 'dashboard',
-    //   label: 'Dashboard',
-    //   icon: Home,
-    //   description: 'Overview & Stats',
-    //   path: '/staff/dashboard'
-    // },
+    {
+      id: 'dashboard',
+      label: 'Dashboard',
+      icon: Home,
+      description: 'Overview & Stats',
+      path: '/staff/dashboard'
+    },
     {
       id: 'ticket-management',
       label: 'All Tickets',
