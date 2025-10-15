@@ -59,6 +59,7 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/cart', require('./routes/cart'));
 app.use('/api/orders', require('./routes/orders'));
+app.use('/api/reports', require('./routes/reports'));
 
 app.get('/api/health', (req, res) => {
   res.json({ message: 'Fashion Fiesta API is running!' });

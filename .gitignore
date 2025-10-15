@@ -27,6 +27,7 @@ backend/dist/
 backend/build/
 backend/uploads/
 backend/logs/
+backend/reports/
 
 # IDE and OS files
 .vscode/
