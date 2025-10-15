@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdminLayout from '../components/AdminLayout';
+import { generateUserReport } from '../services/reportService';
 import axios from 'axios';
 import {
   Users,
@@ -17,7 +18,9 @@ import {
   Calendar,
   AlertCircle,
   CheckCircle,
-  X
+  X,
+  FileText,
+  Download
 } from 'lucide-react';
 
 const UserManagement = () => {
@@ -30,6 +33,7 @@ const UserManagement = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [actionLoading, setActionLoading] = useState(false);
+  const [showReportMenu, setShowReportMenu] = useState(false);
 
   const [editForm, setEditForm] = useState({
     name: '',
@@ -45,6 +49,19 @@ const UserManagement = () => {
   useEffect(() => {
     filterUsers();
   }, [users, searchQuery, roleFilter]);
+
+  const handleGenerateReport = async (format) => {
+    try {
+      setActionLoading(true);
+      await generateUserReport(format);
+      setShowReportMenu(false);
+    } catch (error) {
+      console.error('Error generating report:', error);
+      alert('Failed to generate report. Please try again.');
+    } finally {
+      setActionLoading(false);
+    }
+  };
 
   const fetchUsers = async () => {
     try {
@@ -190,6 +207,45 @@ const UserManagement = () => {
           <div>
             <h1 className="text-3xl font-bold text-gray-900">User Management</h1>
             <p className="text-gray-600 mt-1">Manage all users in the system</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="relative">
+              <button
+                onClick={() => setShowReportMenu(!showReportMenu)}
+                className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                disabled={actionLoading}
+              >
+                <FileText size={20} />
+                Generate Report
+              </button>
+              {showReportMenu && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50 border border-gray-200">
+                  <div className="py-1">
+                    <button
+                      onClick={() => handleGenerateReport('pdf')}
+                      className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 w-full"
+                    >
+                      <Download size={16} />
+                      Download as PDF
+                    </button>
+                    <button
+                      onClick={() => handleGenerateReport('excel')}
+                      className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 w-full"
+                    >
+                      <Download size={16} />
+                      Download as Excel
+                    </button>
+                    <button
+                      onClick={() => handleGenerateReport('csv')}
+                      className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 w-full"
+                    >
+                      <Download size={16} />
+                      Download as CSV
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
