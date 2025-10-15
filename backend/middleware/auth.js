@@ -7,26 +7,33 @@ const mockUsers = [
     _id: '1',
     id: '1',
     name: 'Admin User',
-    email: 'admin@fashionfiesta.com',
+    email: 'admin@gmail.com',
     role: 'admin'
   },
   {
     _id: '2',
     id: '2',
+    name: 'Admin User',
+    email: 'admin@fashionfiesta.com',
+    role: 'admin'
+  },
+  {
+    _id: '3',
+    id: '3',
     name: 'Support Staff',
     email: 'support@fashionfiesta.com',
     role: 'support'
   },
   {
-    _id: '3',
-    id: '3',
+    _id: '4',
+    id: '4',
     name: 'John Customer',
     email: 'customer@example.com',
     role: 'customer'
   },
   {
-    _id: '4',
-    id: '4',
+    _id: '5',
+    id: '5',
     name: 'Ravindu Pasanjith',
     email: 'ravindupasanjith1542@gmail.com',
     role: 'customer'
